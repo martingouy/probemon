@@ -16,7 +16,7 @@ DESCRIPTION = "a command line tool for logging 802.11 probe request frames"
 
 DEBUG = False
 
-def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi):
+def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm):
 	def packet_callback(packet):
 		
 		if not packet.haslayer(Dot11):
@@ -38,6 +38,8 @@ def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi):
 		fields.append(log_time)
 
 		# append the mac address itself
+		if fm is not None and fm != packet.addr2:
+			return
 		fields.append(packet.addr2)
 
 		# parse mac address and look up the organization from the vendor octets
@@ -73,6 +75,7 @@ def main():
 	parser.add_argument('-r', '--rssi', action='store_true', help="include rssi in output")
 	parser.add_argument('-D', '--debug', action='store_true', help="enable debug output")
 	parser.add_argument('-l', '--log', action='store_true', help="enable scrolling live view of the logfile")
+	parser.add_argument('--fm', default=None, help="filter specific mac address")
 	args = parser.parse_args()
 
 	if not args.interface:
@@ -89,7 +92,7 @@ def main():
 	if args.log:
 		logger.addHandler(logging.StreamHandler(sys.stdout))
 	built_packet_cb = build_packet_callback(args.time, logger, 
-		args.delimiter, args.mac_info, args.ssid, args.rssi)
+		args.delimiter, args.mac_info, args.ssid, args.rssi, args.fm)
 	sniff(iface=args.interface, prn=built_packet_cb, store=0)
 
 if __name__ == '__main__':
