@@ -9,6 +9,7 @@ import logging
 from scapy.all import *
 from pprint import pprint
 from logging.handlers import RotatingFileHandler
+from send_endpoint import send_endpoint
 
 
 NAME = 'probemon'
@@ -16,7 +17,7 @@ DESCRIPTION = "a command line tool for logging 802.11 probe request frames"
 
 DEBUG = False
 
-def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm):
+def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm, u):
 	def packet_callback(packet):
 		
 		if not packet.haslayer(Dot11):
@@ -58,8 +59,11 @@ def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm)
 			rssi_val = packet.dBm_AntSignal
 			fields.append(str(rssi_val))
 
-			logger.info(delimiter.join([f.decode('cp1252').encode('utf-8') for f in fields]))
+		fields = [f.decode('cp1252').encode('utf-8') for f in fields]
+		logger.info(delimiter.join(fields))
 
+		if fm is not None and u and ssid and rssi:
+			send_endpoint(fields[0], 'ap1', fields[1], fields[2], fields[3])
 	return packet_callback
 
 def main():
@@ -75,7 +79,9 @@ def main():
 	parser.add_argument('-r', '--rssi', action='store_true', help="include rssi in output")
 	parser.add_argument('-D', '--debug', action='store_true', help="enable debug output")
 	parser.add_argument('-l', '--log', action='store_true', help="enable scrolling live view of the logfile")
-	parser.add_argument('--fm', default=None, help="filter specific mac address")
+	parser.add_argument('-fm', default=None, help="filter specific mac address")
+	parser.add_argument('-u', '--upload', action='store_true', help="upload to db")
+
 	args = parser.parse_args()
 
 	if not args.interface:
@@ -92,7 +98,7 @@ def main():
 	if args.log:
 		logger.addHandler(logging.StreamHandler(sys.stdout))
 	built_packet_cb = build_packet_callback(args.time, logger, 
-		args.delimiter, args.mac_info, args.ssid, args.rssi, args.fm)
+		args.delimiter, args.mac_info, args.ssid, args.rssi, args.fm, args.u)
 	sniff(iface=args.interface, prn=built_packet_cb, store=0)
 
 if __name__ == '__main__':
