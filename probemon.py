@@ -66,7 +66,7 @@ def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm,
 		# logger.info(delimiter.join(fields))
 
 		if fm is not None and u and ssid and rssi:
-			send_endpoint(fields[0], ap_id, fields[1], fields[3], fields[2])
+			send_endpoint(fields[0], ap_id, fields[1].lower(), fields[3], fields[2])
 	return packet_callback
 
 def main():
@@ -90,7 +90,7 @@ def main():
 	if not args.interface:
 		print "error: capture interface not given, try --help"
 		sys.exit(-1)
-		
+
 	os.system("airmon-g start {}".format(args.interface))
 	
 	DEBUG = args.debug
