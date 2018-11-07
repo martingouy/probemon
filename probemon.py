@@ -6,6 +6,7 @@ from datetime import datetime
 import argparse
 import netaddr
 import sys
+import os
 import logging
 from scapy.all import *
 from pprint import pprint
@@ -89,6 +90,8 @@ def main():
 	if not args.interface:
 		print "error: capture interface not given, try --help"
 		sys.exit(-1)
+		
+	os.system("airmon-g start {}".format(args.interface))
 	
 	DEBUG = args.debug
 
