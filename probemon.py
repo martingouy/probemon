@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import time
+import os
 from datetime import datetime
 import argparse
 import netaddr
@@ -16,6 +17,7 @@ NAME = 'probemon'
 DESCRIPTION = "a command line tool for logging 802.11 probe request frames"
 
 DEBUG = False
+ap_id = os.environ['AP_ID']
 
 def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm, u):
 	def packet_callback(packet):
@@ -63,7 +65,7 @@ def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm,
 		logger.info(delimiter.join(fields))
 
 		if fm is not None and u and ssid and rssi:
-			send_endpoint(fields[0], 'ap1', fields[1], fields[3], fields[2])
+			send_endpoint(fields[0], ap_id, fields[1], fields[3], fields[2])
 	return packet_callback
 
 def main():
