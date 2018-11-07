@@ -91,7 +91,7 @@ def main():
 		print "error: capture interface not given, try --help"
 		sys.exit(-1)
 
-	os.system("airmon-g start {}".format(args.interface))
+	os.system("airmon-ng start {}".format(args.interface))
 	
 	DEBUG = args.debug
 
