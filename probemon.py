@@ -63,7 +63,7 @@ def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm,
 		logger.info(delimiter.join(fields))
 
 		if fm is not None and u and ssid and rssi:
-			send_endpoint(fields[0], 'ap1', fields[1], fields[2], fields[3])
+			send_endpoint(fields[0], 'ap1', fields[1], fields[3], fields[2])
 	return packet_callback
 
 def main():
