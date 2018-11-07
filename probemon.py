@@ -41,7 +41,7 @@ def build_packet_callback(time_fmt, logger, delimiter, mac_info, ssid, rssi, fm,
 		fields.append(log_time)
 
 		# append the mac address itself
-		if fm is not None and fm != packet.addr2:
+		if fm is not None and fm.lower() != packet.addr2.lower():
 			return
 		fields.append(packet.addr2)
 
