@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 import argparse
 import netaddr
+import time
 import sys
 import os
 import logging
@@ -92,6 +93,7 @@ def main():
 		sys.exit(-1)
 
 	os.system("airmon-ng start {}".format(args.interface))
+	time.sleep(15)
 	
 	DEBUG = args.debug
 
