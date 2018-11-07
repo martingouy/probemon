@@ -98,7 +98,7 @@ def main():
 	if args.log:
 		logger.addHandler(logging.StreamHandler(sys.stdout))
 	built_packet_cb = build_packet_callback(args.time, logger, 
-		args.delimiter, args.mac_info, args.ssid, args.rssi, args.fm, args.u)
+		args.delimiter, args.mac_info, args.ssid, args.rssi, args.fm, args.upload)
 	sniff(iface=args.interface, prn=built_packet_cb, store=0)
 
 if __name__ == '__main__':
