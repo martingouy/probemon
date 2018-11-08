@@ -4,6 +4,9 @@ echo "AP_ID="$1 >> /etc/environment
 
 # Copy startup bash script 
 cp ./startup.sh ~/startup.sh
+cp ./initstartup /etc/init.d/
+chmod 755 /etc/init.d/initstartup
+update-rc.d initstartup defaults
 
 
 # Automated login on root 
