@@ -6,14 +6,6 @@ echo "AP_ID="$1 >> /etc/environment
 cp ./lightdm-autologin /etc/pam.d/lightdm-autologin
 cp ./lightdm.conf /etc/lightdm/lightdm.conf
 
-# Install supervisor
-apt-get update
-apt-get install -y supervisor
-mkdir /var/log/webhook
-cp ./pythonhook.conf /etc/supervisor/conf.d/
-supervisorctl reread
-supervisorctl update
-
 # Install python dependencies
 cd ~
 git clone https://github.com/drkjam/netaddr
@@ -28,6 +20,15 @@ sudo python setup.py install
 mkdir ~/sniffing 
 cd ~/sniffing
 git clone https://github.com/martingouy/probemon.git
+
+
+# Install supervisor
+apt-get update
+apt-get install -y supervisor
+mkdir /var/log/webhook
+cp ./pythonhook.conf /etc/supervisor/conf.d/
+supervisorctl reread
+supervisorctl update
 
 # Restart
 /sbin/shutdown -h now
