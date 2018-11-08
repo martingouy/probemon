@@ -2,7 +2,7 @@
 # Set environment variable
 echo "AP_ID="$1 >> /etc/environment
 
-# Automated login on root 
+# Automated login on root  3
 cp ./lightdm-autologin /etc/pam.d/lightdm-autologin
 cp ./lightdm.conf /etc/lightdm/lightdm.conf
 
