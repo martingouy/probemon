@@ -3,7 +3,7 @@
 echo "AP_ID="$1 >> /etc/environment
 
 # Copy startup bash script 
-cp ./startup.sh ~/startup.sh2
+cp ./startup.sh ~/startup.sh
 
 
 # Automated login on root 
