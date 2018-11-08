@@ -34,5 +34,5 @@ echo "environment=AP_ID="$1 >> /etc/supervisor/conf.d/pythonhook.conf
 supervisorctl reread
 supervisorctl update
 
-# Restart
-/sbin/shutdown -h now
+## Restart
+#/sbin/shutdown -h now
