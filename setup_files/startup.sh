@@ -8,6 +8,7 @@ git pull
 cp /root/sniffing/probemon/pythonhook.conf /etc/supervisor/conf.d/
 
 # 3) start process
+supervisord
 supervisorctl stop pythonsniff
 supervisorctl update
 supervisorctl start pythonsniff
