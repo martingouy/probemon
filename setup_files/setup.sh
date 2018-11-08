@@ -26,6 +26,8 @@ git clone https://github.com/martingouy/probemon.git
 apt-get update
 apt-get install -y supervisor
 mkdir /var/log/webhook
+systemctl enable supervisor
+systemctl start supervisor
 cp ./pythonhook.conf /etc/supervisor/conf.d/
 supervisorctl reread
 supervisorctl update
