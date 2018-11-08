@@ -3,8 +3,8 @@
 echo "AP_ID="$1 >> /etc/environment
 
 # Copy startup bash script 
-cp ./startup.sh /etc/init.d/startup.sh
-update-rc.d /etc/init.d/startup.sh defaults
+cp ./startup.sh ~/startup.sh2
+
 
 # Automated login on root 
 cp ./lightdm-autologin /etc/pam.d/lightdm-autologin
