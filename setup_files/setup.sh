@@ -28,7 +28,7 @@ apt-get install -y supervisor
 mkdir /var/log/webhook
 systemctl enable supervisor
 systemctl start supervisor
-cp ./pythonhook.conf /etc/supervisor/conf.d/
+cp /root/sniffing/probemon/setup_files/pythonhook.conf /etc/supervisor/conf.d/
 supervisorctl reread
 supervisorctl update
 
