@@ -10,6 +10,10 @@ cp ./lightdm.conf /etc/lightdm/lightdm.conf
 apt-get update
 apt-get install -y supervisor
 mkdir /var/log/webhook
+cp ./pythonhook.conf /etc/supervisor/conf.d/
+supervisorctl reread
+supervisorctl update
+
 # Install python dependencies
 cd ~
 git clone https://github.com/drkjam/netaddr

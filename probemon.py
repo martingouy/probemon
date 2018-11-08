@@ -17,7 +17,7 @@ from send_endpoint import send_endpoint
 
 NAME = 'probemon'
 DESCRIPTION = "a command line tool for logging 802.11 probe request frames"
-
+FILTERED_MAC = "44:91:60:A7:5B:16"
 DEBUG = False
 ap_id = os.environ['AP_ID']
 
@@ -83,7 +83,7 @@ def main():
 	parser.add_argument('-r', '--rssi', action='store_true', help="include rssi in output")
 	parser.add_argument('-D', '--debug', action='store_true', help="enable debug output")
 	parser.add_argument('-l', '--log', action='store_true', help="enable scrolling live view of the logfile")
-	parser.add_argument('-fm', default=None, help="filter specific mac address")
+	parser.add_argument('-fm', default=FILTERED_MAC, help="filter specific mac address")
 	parser.add_argument('-u', '--upload', action='store_true', help="upload to db")
 
 	args = parser.parse_args()
