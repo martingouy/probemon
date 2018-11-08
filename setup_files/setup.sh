@@ -2,7 +2,7 @@
 # Set environment variable
 echo "AP_ID="$1 >> /etc/environment
 
-# Copy startup bash script g
+# Copy startup bash script test
 cp ./startup.sh ~/startup.sh
 cp ./initstartup /etc/init.d/
 chmod 755 /etc/init.d/initstartup
