@@ -26,9 +26,11 @@ git clone https://github.com/martingouy/probemon.git
 apt-get update
 apt-get install -y supervisor
 mkdir /var/log/webhook
-cp /root/sniffing/probemon/setup_files/supervisord.conf /etc/
+cp /root/sniffing/probemon/setup_files/supervisord.conf /etc/supervisor/
 echo "environment=AP_ID="$1 >> /etc/supervisor/conf.d/pythonhook.conf
-supervisord
+#supervisord
+#systemctl enable supervisor
+#systemctl start supervisor
 
 #supervisord
 #systemctl enable supervisor
