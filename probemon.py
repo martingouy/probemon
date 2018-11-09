@@ -17,7 +17,7 @@ from send_endpoint import send_endpoint
 
 NAME = 'probemon'
 DESCRIPTION = "a command line tool for logging 802.11 probe request frames"
-FILTERED_MAC = "44:91:60:A7:5B:16"
+FILTERED_MAC = "f6:2f:ee:2c:c9:6c"
 DEBUG = False
 ap_id = os.environ['AP_ID']
 
