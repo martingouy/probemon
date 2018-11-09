@@ -7,3 +7,4 @@ def send_endpoint(ts, ap, device_mac, signal_strength, ssid):
         requests.post(ENDPOINT, data={'ts': ts, 'ap': ap, 'device_mac': device_mac, 'signal_strength': signal_strength, 'ssid': ssid})
     except:
         pass
+        
